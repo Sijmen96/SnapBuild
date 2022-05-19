@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
-
+    [SerializeField] public Vector3 rotationPoint;
     [SerializeField] public Vector3[] snapPoints;
+
 
     void Start()
     {
@@ -33,11 +34,10 @@ public class Buildable : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(getSnapPointInWorld(point), 0.1f);
-            Debug.Log("hi");
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(getSnapPointInWorld(rotationPoint), 0.05f);
         }
-
     }
-
 }
 
 
