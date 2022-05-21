@@ -15,7 +15,7 @@ public class BuildingManager : MonoBehaviour
         if (selectedObject != null)
         {
             updateRotation();
-            selectedObject.GetComponent<BuildableV2>().updatePositionRotation(GetMouseWorldPosistionSnapped(), rotation);
+            selectedObject.GetComponent<BuildableV2>().updatePositionRotation(GetMouseWorldPosistion(), rotation);
 
             //rotateObject();
 
@@ -43,7 +43,7 @@ public class BuildingManager : MonoBehaviour
 
     public void selectObject(int index)
     {
-        selectedObject = Instantiate(objects[index], GetMouseWorldPosistionSnapped(), objects[index].transform.rotation);
+        selectedObject = Instantiate(objects[index], GetMouseWorldPosistion(), objects[index].transform.rotation);
         selectedObject.GetComponent<BuildableV2>().isSelectedObject = true;
 
         selectedObject.layer = LayerMask.NameToLayer("Ignore Raycast");

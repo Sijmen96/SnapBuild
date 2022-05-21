@@ -10,6 +10,7 @@ public class BuildableV2 : MonoBehaviour
     private Vector3 closestSnap;
     private Vector3 closestOtherSnap;
     private BuildingManager buildingManager;
+    bool snapActive = false;
 
     Vector3 snap = new Vector3();
     Vector3 otherSnap = new Vector3();
@@ -21,8 +22,18 @@ public class BuildableV2 : MonoBehaviour
 
     public void updatePositionRotation(Vector3 posistion, Vector3 rotation)
     {
+        Debug.Log(Vector3.Distance(posistion, posistion + snapPoints[0]));
+        if (Vector3.Distance(posistion, posistion + snapPoints[0]) > 1.5f)
+        {
+            snapActive = false;
+        }
+
+
         //Change gameObject location and rotation
-        transform.position = posistion + snapPoints[0];
+        if (!snapActive)
+        {
+            transform.position = posistion + snapPoints[0];
+        }
 
         transform.RotateAround(posistion + snapPoints[0], Vector3.up, rotation.y);
 
@@ -114,11 +125,9 @@ public class BuildableV2 : MonoBehaviour
         //check if buildables are colliding
         if (isSelectedObject && other.CompareTag("Buildables"))
         {
-            Debug.Log(other.name);
-
+            //Debug.Log(other.name);
             Vector3[] otherSnapPoints = other.GetComponent<BuildableV2>().snapPoints;
             Vector3 otherPosition = other.transform.position;
-
             float closestDistance = Mathf.Infinity;
 
             for (int i = 0; i < snapPoints.Length; i++)
@@ -132,19 +141,33 @@ public class BuildableV2 : MonoBehaviour
                             closestDistance = distance;
                             snap = transform.position + snapPoints[i];
                             otherSnap = otherPosition + otherSnapPoints[j];
-                            Debug.Log(snap + " " + otherSnap);
+                            //Debug.Log(snap + " " + otherSnap);
                         }
                     }
                 }
-            if (closestDistance < 0.5f)
+            if (closestDistance < 1)
             {
                 Vector3 DeltaSnap = snap - otherSnap;
                 transform.position = transform.position - DeltaSnap;
+                snapActive = true;
+                Debug.Log("IN");
 
             }
         }
 
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (isSelectedObject && other.CompareTag("Buildables"))
+        {
+            snap = new Vector3();
+            otherSnap = new Vector3();
+            snapActive = false;
+        }
+    }
+
+
 
 
 
