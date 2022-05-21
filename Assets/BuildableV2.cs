@@ -16,6 +16,9 @@ public class BuildableV2 : MonoBehaviour {
     Vector3 tempMouse = new Vector3();
     Vector3 mousePosition = new Vector3();
 
+    float snapStart = 1f;
+    float snapStop = 0.5f;
+
     void Start() {
         this.buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
     }
@@ -23,7 +26,7 @@ public class BuildableV2 : MonoBehaviour {
     public void updatePositionRotation(Vector3 posistion, Vector3 rotation) {
         mousePosition = posistion;
         //Debug.Log(Vector3.Distance(posistion, transform.position + snapPoints[0]));
-        if (Vector3.Distance(posistion, tempMouse) > 1.5f) {
+        if (Vector3.Distance(posistion, tempMouse) > snapStop) {
             snap = new Vector3();
             otherSnap = new Vector3();
             snapActive = false;
@@ -141,7 +144,7 @@ public class BuildableV2 : MonoBehaviour {
                         }
                     }
                 }
-            if (closestDistance < 1) {
+            if (closestDistance < snapStart) {
                 Vector3 DeltaSnap = snap - otherSnap;
                 transform.position = transform.position - DeltaSnap;
                 snapActive = true;
