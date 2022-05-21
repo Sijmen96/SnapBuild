@@ -8,7 +8,7 @@ public class BuildingManager : MonoBehaviour
     private GameObject selectedObject;
     private Color selectedColor;
     private Vector3 rotation = Vector3.zero;
-    public Vector3 snappedPoint;
+    public Vector3 snappedPoint = Vector3.zero;
 
     void Update()
     {
@@ -82,20 +82,10 @@ public class BuildingManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
-            // if (raycastHit.collider?.gameObject)
-            // {
-            //     BuildableV2 obj = raycastHit.collider.gameObject.GetComponent<BuildableV2>();
-            //     if (obj != null)
-            //     {
-            //         return obj.getClosestSnapPoint(raycastHit.point);
-            //     }
-            // }
-
             if (snappedPoint != Vector3.zero)
             {
                 return snappedPoint;
             }
-
             return raycastHit.point;
         }
         else

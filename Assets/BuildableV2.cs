@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildableV2 : MonoBehaviour
@@ -9,6 +7,8 @@ public class BuildableV2 : MonoBehaviour
     [SerializeField] Vector3 rotation = new Vector3(0, 0, 0);
 
     public bool isSelectedObject = false;
+    private Vector3 closestSnap;
+    private Vector3 closestOtherSnap;
     private BuildingManager buildingManager;
 
     void Start()
@@ -19,7 +19,8 @@ public class BuildableV2 : MonoBehaviour
     public void updatePositionRotation(Vector3 posistion, Vector3 rotation)
     {
         //Change gameObject location and rotation
-        transform.position = posistion + snapPoints[0];
+        transform.position = posistion;
+
 
 
         transform.RotateAround(posistion + snapPoints[0], Vector3.up, rotation.y);
@@ -32,7 +33,6 @@ public class BuildableV2 : MonoBehaviour
         }
     }
 
-
     void OnDrawGizmos()
     {
         foreach (var point in snapPoints)
@@ -40,26 +40,15 @@ public class BuildableV2 : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(transform.position + point, 0.1f);
         }
+
+        if (isSelectedObject)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(closestOtherSnap, 0.2f);
+            Gizmos.DrawSphere(closestSnap, 0.2f);
+        }
     }
 
-
-    // public Vector3 getClosestSnapPoint(Vector3 mousePosistion)
-    // {
-    //     Vector3 closestSnapPoint = Vector3.zero;
-    //     float closestDistance = Mathf.Infinity;
-
-    //     //Compare distances
-    //     for (int i = 0; i < snapPoints.Length; i++)
-    //     {
-    //         float distance = Vector3.Distance(mousePosistion, transform.position + snapPoints[i]);
-    //         if (distance < closestDistance)
-    //         {
-    //             closestDistance = distance;
-    //             closestSnapPoint = transform.position + snapPoints[i];
-    //         }
-    //     }
-    //     return closestSnapPoint;
-    // }
 
     public Vector3 GetClosestCompared(Vector3[] otherSnapPoints, Vector3 otherPosistion)
     {
@@ -77,11 +66,14 @@ public class BuildableV2 : MonoBehaviour
                     {
                         closestDistance = distance;
                         closestSnapPoint = transform.position + snapPoints[i];
+                        this.closestSnap = closestSnapPoint;
+                        this.closestOtherSnap = otherPosistion + otherSnapPoints[j];
                         //ohterclosestSnapPoint = otherPosistion + otherSnapPoints[j];
                     }
                 }
             }
-        return closestSnapPoint;
+        Debug.Log(this.closestOtherSnap);
+        return this.closestOtherSnap;
     }
 
     private void OnTriggerEnter(Collider other)
