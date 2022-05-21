@@ -2,47 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingManager : MonoBehaviour
-{
+public class BuildingManager : MonoBehaviour {
     public GameObject[] objects;
     private GameObject selectedObject;
     private Color selectedColor;
     private Vector3 rotation = Vector3.zero;
     public Vector3 snappedPoint = Vector3.zero;
 
-    void Update()
-    {
-        if (selectedObject != null)
-        {
+    void Update() {
+        if (selectedObject != null) {
             updateRotation();
             selectedObject.GetComponent<BuildableV2>().updatePositionRotation(GetMouseWorldPosistion(), rotation);
 
             //rotateObject();
 
-            if (Input.GetMouseButtonDown(0))
-            {
+            if (Input.GetMouseButtonDown(0)) {
                 placeObject();
             }
-            if (Input.GetMouseButtonDown(1))
-            {
+            if (Input.GetMouseButtonDown(1)) {
                 cancelObject();
             }
         }
 
-        if (snappedPoint != Vector3.zero && Vector3.Distance(snappedPoint, GetMouseWorldPosistion()) > 1f)
-        {
+        if (snappedPoint != Vector3.zero && Vector3.Distance(snappedPoint, GetMouseWorldPosistion()) > 1f) {
             snappedPoint = Vector3.zero;
         }
 
     }
 
-    public void setSnappedPoint(Vector3 snappedPoint)
-    {
+    public void setSnappedPoint(Vector3 snappedPoint) {
         this.snappedPoint = snappedPoint;
     }
 
-    public void selectObject(int index)
-    {
+    public void selectObject(int index) {
         selectedObject = Instantiate(objects[index], GetMouseWorldPosistion(), objects[index].transform.rotation);
         selectedObject.GetComponent<BuildableV2>().isSelectedObject = true;
 
@@ -51,71 +43,54 @@ public class BuildingManager : MonoBehaviour
 
     }
 
-    public void placeObject()
-    {
+    public void placeObject() {
         selectedObject.layer = LayerMask.NameToLayer("Default");
         selectedObject.GetComponent<BuildableV2>().isSelectedObject = false;
         selectedObject = null;
     }
 
-    public void cancelObject()
-    {
+    public void cancelObject() {
         makeTransparant(false);
         Destroy(selectedObject);
     }
 
-    public void makeTransparant(bool transparantState)
-    {
+    public void makeTransparant(bool transparantState) {
         Color selectedColorTransparant = new Color(selectedColor.r, selectedColor.g, selectedColor.b, 0.5f);
-        if (transparantState)
-        {
+        if (transparantState) {
             selectedObject.gameObject.GetComponent<MeshRenderer>().material.color = selectedColorTransparant;
-        }
-        else
-        {
+        } else {
             selectedObject.gameObject.GetComponent<MeshRenderer>().material.color = selectedColor;
         }
     }
 
-    public Vector3 GetMouseWorldPosistionSnapped()
-    {
+    public Vector3 GetMouseWorldPosistionSnapped() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
-        {
-            if (snappedPoint != Vector3.zero)
-            {
+        if (Physics.Raycast(ray, out RaycastHit raycastHit)) {
+            if (snappedPoint != Vector3.zero) {
                 return snappedPoint;
             }
             return raycastHit.point;
-        }
-        else
-        {
+        } else {
             return Vector3.zero;
         }
     }
 
-    public Vector3 GetMouseWorldPosistion()
-    {
+    public Vector3 GetMouseWorldPosistion() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
-        {
+        if (Physics.Raycast(ray, out RaycastHit raycastHit)) {
             return raycastHit.point;
-        }
-        else
-        {
+        } else {
             return Vector3.zero;
         }
     }
 
-    void updateRotation()
-    {
+    void updateRotation() {
         float angle = 0;
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             angle += 22.5f;
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-        {
+        } else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+          {
             angle -= 22.5f;
         }
         rotation.y = angle;

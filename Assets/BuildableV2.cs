@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class BuildableV2 : MonoBehaviour
-{
+public class BuildableV2 : MonoBehaviour {
     [SerializeField] Vector3[] snapPoints;
     [SerializeField] Vector3 posistion = new Vector3(0, 0, 0);
     [SerializeField] Vector3 rotation = new Vector3(0, 0, 0);
@@ -17,46 +16,39 @@ public class BuildableV2 : MonoBehaviour
     Vector3 tempMouse = new Vector3();
     Vector3 mousePosition = new Vector3();
 
-    void Start()
-    {
+    void Start() {
         this.buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
     }
 
-    public void updatePositionRotation(Vector3 posistion, Vector3 rotation)
-    {
+    public void updatePositionRotation(Vector3 posistion, Vector3 rotation) {
         mousePosition = posistion;
         //Debug.Log(Vector3.Distance(posistion, transform.position + snapPoints[0]));
-        if (Vector3.Distance(posistion, tempMouse) > 1.5f)
-        {
+        if (Vector3.Distance(posistion, tempMouse) > 1.5f) {
+            snap = new Vector3();
+            otherSnap = new Vector3();
             snapActive = false;
         }
 
 
         //Change gameObject location and rotation
-        if (!snapActive)
-        {
+        if (!snapActive) {
             transform.position = posistion + snapPoints[0];
             transform.RotateAround(posistion + snapPoints[0], Vector3.up, rotation.y);
-        }
-        else
-        {
+        } else {
             transform.RotateAround(otherSnap, Vector3.up, rotation.y);
         }
 
 
 
         //Change snapPoint location
-        for (int i = 0; i < snapPoints.Length; i++)
-        {
+        for (int i = 0; i < snapPoints.Length; i++) {
             //snapPoints[i] = snapPoints[i] + transform.position;
             snapPoints[i] = Quaternion.AngleAxis(rotation.y, Vector3.up) * snapPoints[i];
         }
     }
 
-    void OnDrawGizmos()
-    {
-        foreach (var point in snapPoints)
-        {
+    void OnDrawGizmos() {
+        foreach (var point in snapPoints) {
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(transform.position + point, 0.1f);
         }
@@ -68,8 +60,7 @@ public class BuildableV2 : MonoBehaviour
         //     Gizmos.DrawSphere(closestSnap, 0.2f);
         // }
 
-        if (isSelectedObject)
-        {
+        if (isSelectedObject) {
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(snap, 0.2f);
             Gizmos.DrawSphere(otherSnap, 0.2f);
@@ -125,31 +116,24 @@ public class BuildableV2 : MonoBehaviour
     //     }
     // }
 
-    public Vector3[] getSnapPoints()
-    {
+    public Vector3[] getSnapPoints() {
         return snapPoints;
     }
 
-
-
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         //check if buildables are colliding
-        if (isSelectedObject && other.CompareTag("Buildables"))
-        {
+        if (isSelectedObject && other.CompareTag("Buildables")) {
             //Debug.Log(other.name);
             Vector3[] otherSnapPoints = other.GetComponent<BuildableV2>().snapPoints;
             Vector3 otherPosition = other.transform.position;
             float closestDistance = Mathf.Infinity;
 
             for (int i = 0; i < snapPoints.Length; i++)
-                for (int j = 0; j < otherSnapPoints.Length; j++)
-                {
+                for (int j = 0; j < otherSnapPoints.Length; j++) {
                     {
                         float distance = Vector3.Distance(otherPosition + otherSnapPoints[j], transform.position + snapPoints[i]);
 
-                        if (distance < closestDistance)
-                        {
+                        if (distance < closestDistance) {
                             closestDistance = distance;
                             snap = transform.position + snapPoints[i];
                             otherSnap = otherPosition + otherSnapPoints[j];
@@ -157,8 +141,7 @@ public class BuildableV2 : MonoBehaviour
                         }
                     }
                 }
-            if (closestDistance < 1)
-            {
+            if (closestDistance < 1) {
                 Vector3 DeltaSnap = snap - otherSnap;
                 transform.position = transform.position - DeltaSnap;
                 snapActive = true;
@@ -170,10 +153,8 @@ public class BuildableV2 : MonoBehaviour
 
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (isSelectedObject && other.CompareTag("Buildables"))
-        {
+    private void OnTriggerExit(Collider other) {
+        if (isSelectedObject && other.CompareTag("Buildables")) {
             snap = new Vector3();
             otherSnap = new Vector3();
             snapActive = false;
