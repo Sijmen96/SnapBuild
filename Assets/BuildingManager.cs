@@ -7,12 +7,18 @@ public class BuildingManager : MonoBehaviour
     public GameObject[] objects;
     private GameObject selectedObject;
     private Color selectedColor;
+    private Vector3 rotation = Vector3.zero;
+    public Vector3 snappedPoint;
 
     void Update()
     {
         if (selectedObject != null)
         {
-            selectedObject.transform.position = GetMouseWorldPosistion();
+            updateRotation();
+            selectedObject.GetComponent<BuildableV2>().updatePositionRotation(GetMouseWorldPosistionSnapped(), rotation);
+
+            //rotateObject();
+
             if (Input.GetMouseButtonDown(0))
             {
                 placeObject();
@@ -23,22 +29,32 @@ public class BuildingManager : MonoBehaviour
             }
         }
 
-        rotateObject();
+        if (snappedPoint != Vector3.zero && Vector3.Distance(snappedPoint, GetMouseWorldPosistion()) > 1f)
+        {
+            snappedPoint = Vector3.zero;
+        }
+
     }
 
+    public void setSnappedPoint(Vector3 snappedPoint)
+    {
+        this.snappedPoint = snappedPoint;
+    }
 
     public void selectObject(int index)
     {
-        selectedObject = Instantiate(objects[index], GetMouseWorldPosistion(), objects[index].transform.rotation);
-        selectedObject.GetComponent<BoxCollider>().enabled = false;
+        selectedObject = Instantiate(objects[index], GetMouseWorldPosistionSnapped(), objects[index].transform.rotation);
+        selectedObject.GetComponent<BuildableV2>().isSelectedObject = true;
+
+        selectedObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         selectedColor = selectedObject.gameObject.GetComponent<MeshRenderer>().material.color;
-        makeTransparant(true);
+
     }
 
     public void placeObject()
     {
-        makeTransparant(false);
-        selectedObject.GetComponent<BoxCollider>().enabled = true;
+        selectedObject.layer = LayerMask.NameToLayer("Default");
+        selectedObject.GetComponent<BuildableV2>().isSelectedObject = false;
         selectedObject = null;
     }
 
@@ -61,21 +77,25 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-
-
-    public Vector3 GetMouseWorldPosistion()
+    public Vector3 GetMouseWorldPosistionSnapped()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
-            if (raycastHit.collider?.gameObject)
+            // if (raycastHit.collider?.gameObject)
+            // {
+            //     BuildableV2 obj = raycastHit.collider.gameObject.GetComponent<BuildableV2>();
+            //     if (obj != null)
+            //     {
+            //         return obj.getClosestSnapPoint(raycastHit.point);
+            //     }
+            // }
+
+            if (snappedPoint != Vector3.zero)
             {
-                Buildable obj = raycastHit.collider.gameObject.GetComponent<Buildable>();
-                if (obj)
-                {
-                    return obj.getClosestSnapPoint(raycastHit.point) + gameObject.transform.position + (raycastHit.normal - Vector3.up);
-                }
+                return snappedPoint;
             }
+
             return raycastHit.point;
         }
         else
@@ -84,20 +104,31 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    public void rotateObject()
+    public Vector3 GetMouseWorldPosistion()
     {
-        float angle;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        {
+            return raycastHit.point;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    void updateRotation()
+    {
+        float angle = 0;
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            angle = +360 / 16;
-            selectedObject.transform.Rotate(Vector3.up, angle);
+            angle += 22.5f;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            angle = -360 / 16;
-            selectedObject.transform.Rotate(Vector3.up, angle);
-
+            angle -= 22.5f;
         }
+        rotation.y = angle;
     }
 }
 

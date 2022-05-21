@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
-    [SerializeField] public Vector3 rotationPoint;
     [SerializeField] public Vector3[] snapPoints;
+
+    private Vector3 rotation;
 
 
     void Start()
@@ -51,6 +52,14 @@ public class Buildable : MonoBehaviour
         return closePoint;
     }
 
+    void Rotate(Vector3 pivot, Vector3 rotation)
+    {
+        this.rotation = rotation;
+        RotatePointAroundPivot(this.transform.position, pivot, rotation);
+        //gameObject.transform.rotation = RotatePointAroundPivot(this.transform.position, pivot, rotation);
+
+    }
+
     void OnDrawGizmos()
     {
         foreach (var point in snapPoints)
@@ -58,7 +67,7 @@ public class Buildable : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(getSnapPointInWorld(point), 0.1f);
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(getSnapPointInWorld(rotationPoint), 0.05f);
+            Gizmos.DrawSphere(getSnapPointInWorld(snapPoints[0]), 0.05f);
         }
     }
 }
