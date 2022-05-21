@@ -62,11 +62,20 @@ public class BuildingManager : MonoBehaviour
     }
 
 
-    public static Vector3 GetMouseWorldPosistion()
+
+    public Vector3 GetMouseWorldPosistion()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
+            if (raycastHit.collider?.gameObject)
+            {
+                Buildable obj = raycastHit.collider.gameObject.GetComponent<Buildable>();
+                if (obj)
+                {
+                    return obj.getClosestSnapPoint(raycastHit.point) + gameObject.transform.position + (raycastHit.normal - Vector3.up);
+                }
+            }
             return raycastHit.point;
         }
         else
