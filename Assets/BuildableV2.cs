@@ -14,6 +14,8 @@ public class BuildableV2 : MonoBehaviour
 
     Vector3 snap = new Vector3();
     Vector3 otherSnap = new Vector3();
+    Vector3 tempMouse = new Vector3();
+    Vector3 mousePosition = new Vector3();
 
     void Start()
     {
@@ -22,8 +24,9 @@ public class BuildableV2 : MonoBehaviour
 
     public void updatePositionRotation(Vector3 posistion, Vector3 rotation)
     {
-        Debug.Log(Vector3.Distance(posistion, posistion + snapPoints[0]));
-        if (Vector3.Distance(posistion, posistion + snapPoints[0]) > 1.5f)
+        mousePosition = posistion;
+        //Debug.Log(Vector3.Distance(posistion, transform.position + snapPoints[0]));
+        if (Vector3.Distance(posistion, tempMouse) > 1.5f)
         {
             snapActive = false;
         }
@@ -33,9 +36,14 @@ public class BuildableV2 : MonoBehaviour
         if (!snapActive)
         {
             transform.position = posistion + snapPoints[0];
+            transform.RotateAround(posistion + snapPoints[0], Vector3.up, rotation.y);
+        }
+        else
+        {
+            transform.RotateAround(otherSnap, Vector3.up, rotation.y);
         }
 
-        transform.RotateAround(posistion + snapPoints[0], Vector3.up, rotation.y);
+
 
         //Change snapPoint location
         for (int i = 0; i < snapPoints.Length; i++)
@@ -65,7 +73,11 @@ public class BuildableV2 : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(snap, 0.2f);
             Gizmos.DrawSphere(otherSnap, 0.2f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(snapPoints[0] + transform.position, 0.1f);
         }
+
+
     }
 
 
@@ -150,7 +162,8 @@ public class BuildableV2 : MonoBehaviour
                 Vector3 DeltaSnap = snap - otherSnap;
                 transform.position = transform.position - DeltaSnap;
                 snapActive = true;
-                Debug.Log("IN");
+                tempMouse = mousePosition;
+                Debug.Log(tempMouse);
 
             }
         }
