@@ -156,13 +156,13 @@ public class BuildableV2 : MonoBehaviour {
 
     }
 
-    private void OnTriggerExit(Collider other) {
-        if (isSelectedObject && other.CompareTag("Buildables")) {
-            snap = new Vector3();
-            otherSnap = new Vector3();
-            snapActive = false;
-        }
-    }
+    // private void OnTriggerExit(Collider other) {
+    //     if (isSelectedObject && other.CompareTag("Buildables")) {
+    //         snap = new Vector3();
+    //         otherSnap = new Vector3();
+    //         snapActive = false;
+    //     }
+    // }
 
 
 

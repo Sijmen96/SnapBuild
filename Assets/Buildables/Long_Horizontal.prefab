@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3023028109437224661}
   - component: {fileID: 3023028109437224666}
   - component: {fileID: 3023028109437224667}
-  - component: {fileID: -411824854335273287}
+  - component: {fileID: -6550224158045912932}
   - component: {fileID: 6212984030548769209}
   m_Layer: 0
   m_Name: Long_Horizontal
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-411824854335273287
+--- !u!114 &-6550224158045912932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,16 +108,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3023028109437224664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ac1262d78281f42b8447089ac3534c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a9c1ac59f43ea1499bcba601884f527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   snapPoints:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: 0}
-  posistion: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  isSelectedObject: 0
 --- !u!54 &6212984030548769209
 Rigidbody:
   m_ObjectHideFlags: 0
