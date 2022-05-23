@@ -45,11 +45,9 @@ public class BuildingManager : MonoBehaviour {
             if (Input.GetMouseButtonDown(1)) {
                 cancelObject();
             }
-            if (Input.GetMouseButtonDown(2)) {
-                //werkt niet?!
-                Debug.Log("destroy");
-                destroyObject();
-            }
+        }
+        if (Input.GetMouseButtonDown(2)) {
+            destroyObject();
         }
     }
 
@@ -70,8 +68,10 @@ public class BuildingManager : MonoBehaviour {
     }
 
     public void destroyObject() {
-        Destroy(GetGameObject());
-        Debug.Log("destroy");
+        GameObject tempObject = GetGameObject();
+        if (tempObject.CompareTag("Buildables")) {
+            Destroy(tempObject);
+        }
     }
 
     public Vector3 GetMouseWorldPosistion() {
@@ -104,33 +104,33 @@ public class BuildingManager : MonoBehaviour {
 
     //Get ontriggerEnter other
     public void BuildableIsColliding(GameObject otherGameobject) {
-        Debug.Log("colliding");
+        if (snapActive == false) {
+            BuildableV3 other = otherGameobject.GetComponent<BuildableV3>();
+            BuildableV3 selected = selectedObject.GetComponent<BuildableV3>();
 
-        BuildableV3 other = otherGameobject.GetComponent<BuildableV3>();
-        BuildableV3 selected = selectedObject.GetComponent<BuildableV3>();
+            Vector3[] otherSnapPoints = other.GetSnapPointsWorld();
+            Vector3[] selectedSnapPoints = selected.GetSnapPointsWorld();
 
-        Vector3[] otherSnapPoints = other.GetSnapPointsWorld();
-        Vector3[] selectedSnapPoints = selected.GetSnapPointsWorld();
+            float closestDistance = Mathf.Infinity;
+            for (int i = 0; i < selectedSnapPoints.Length; i++) {
+                for (int j = 0; j < otherSnapPoints.Length; j++) {
+                    {
+                        float distance = Vector3.Distance(otherSnapPoints[j], selectedSnapPoints[i]);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
 
-        float closestDistance = Mathf.Infinity;
-        for (int i = 0; i < selectedSnapPoints.Length; i++) {
-            for (int j = 0; j < otherSnapPoints.Length; j++) {
-                {
-                    float distance = Vector3.Distance(otherSnapPoints[j], selectedSnapPoints[i]);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-
-                        selectedSnap = selectedSnapPoints[i];
-                        otherSnap = otherSnapPoints[j]; //Is dit goed?
+                            selectedSnap = selectedSnapPoints[i];
+                            otherSnap = otherSnapPoints[j]; //Is dit goed?
+                        }
                     }
                 }
             }
-        }
-        if (closestDistance < 1f) {
-            Vector3 DeltaSnap = selectedSnap - otherSnap;
-            selectedObject.transform.position = selectedObject.transform.position - DeltaSnap;
-            snapActive = true;
-            tempMouse = mousePosition;
+            if (closestDistance < 1f) {
+                Vector3 DeltaSnap = selectedSnap - otherSnap;
+                selectedObject.transform.position = selectedObject.transform.position - DeltaSnap;
+                snapActive = true;
+                tempMouse = mousePosition;
+            }
         }
     }
 
