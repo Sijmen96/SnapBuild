@@ -16,6 +16,7 @@ public class PlayerMovementController : MonoBehaviour {
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float sensitivity;
     [SerializeField] private float jumpforce;
+    private List<GameObject> invisibleGameObjects = new List<GameObject>();
 
     private void FixedUpdate() {
         GetObjectsAbovePlayer();
@@ -44,7 +45,7 @@ public class PlayerMovementController : MonoBehaviour {
 
      private void GetObjectsAbovePlayer() {
         List<GameObject> gameObjectsAbovePlayer = new List<GameObject>();
-        List<Collider> hitColliders = Physics.OverlapBox(transform.position - (rotation * new Vector3(0, 0, 3)), new Vector3(invisibilityRange,invisibilityRange,invisibilityRange)).ToList();
+        List<Collider> hitColliders = Physics.OverlapBox(transform.position - (CameraPivot.rotation * new Vector3(0, 0, 3)), new Vector3(invisibilityRange,invisibilityRange,invisibilityRange)).ToList();
 
         // add all gameobjects that are buildables and above player to a list
         foreach (var hitCollider in hitColliders) {

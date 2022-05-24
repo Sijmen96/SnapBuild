@@ -67,7 +67,7 @@ public class BuildingManager : MonoBehaviour {
 
     public void destroyObject() {
         GameObject tempObject = GetGameObject();
-        if (tempObject.CompareTag("Buildables")) {
+        if (tempObject != null && tempObject.CompareTag("Buildables")) {
             Destroy(tempObject);
         }
     }
