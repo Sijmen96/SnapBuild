@@ -46,7 +46,7 @@ public class BuildingManager : MonoBehaviour {
                 cancelObject();
             }
         }
-        if (Input.GetMouseButtonDown(2)) {
+        if (Input.GetMouseButtonDown(1)) {
             destroyObject();
         }
     }

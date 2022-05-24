@@ -17,7 +17,7 @@ public class CameraScript : MonoBehaviour {
     void Update() {
         transform.position = Vector3.Lerp(transform.position, Player.transform.position, Time.deltaTime * cameraSmoothing);
 
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(2)) {
 
             targetRotation += new Vector3(0, Input.GetAxis("Mouse X") * cameraSensivity, 0);
             Debug.Log(targetRotation);
