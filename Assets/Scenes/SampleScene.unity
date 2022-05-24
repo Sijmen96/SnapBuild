@@ -2240,6 +2240,10 @@ PrefabInstance:
       propertyPath: PlayerCamera
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 2070492456209923038, guid: 7375876220e11104396860941b4f30ba, type: 3}
+      propertyPath: invisibilityRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2070492456209923039, guid: 7375876220e11104396860941b4f30ba, type: 3}
       propertyPath: m_RootOrder
       value: 6

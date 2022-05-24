@@ -1,16 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildableV3 : MonoBehaviour {
 
     [SerializeField] public Vector3[] snapPoints;
     public bool isSelectedObject = false;
+    public Material visibleMaterial;
+    public Material invisibleMaterial;
     private BuildingManager buildingManager;
+    private bool isVisible = false;
 
     void Start() {
         this.buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
     }
+
+    public void setVisibility(bool isVisible) {
+             Debug.Log("set visibility: " + isVisible);
+        if (this.isVisible != isVisible) {
+            gameObject.GetComponent<Renderer>().material = isVisible ? visibleMaterial : invisibleMaterial;
+            var color = invisibleMaterial.color;
+            invisibleMaterial.color = new Color(color.r, color.g, color.b, 0.05f);
+        }
+        this.isVisible = isVisible;
+    }
+
 
     public Vector3[] GetSnapPoints() {
         return snapPoints;

@@ -117,6 +117,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: 0}
   isSelectedObject: 0
+  visibleMaterial: {fileID: 2100000, guid: 52d62a84d4efdf648be127b7f92f267d, type: 2}
+  invisibleMaterial: {fileID: 2100000, guid: f35340a99ae371f4c95f6f4b9523921f, type: 2}
 --- !u!54 &6212984030548769209
 Rigidbody:
   m_ObjectHideFlags: 0
