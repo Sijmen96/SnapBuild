@@ -37,7 +37,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
 
         if (directionVector != Vector3.zero) {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(directionVector), Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(directionVector), Time.deltaTime * 10f);
 
         }
 
