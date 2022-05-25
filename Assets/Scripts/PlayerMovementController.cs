@@ -15,7 +15,7 @@ public class PlayerMovementController : MonoBehaviour {
     [SerializeField] private float jumpforce;
 
     private void Update() {
-        canJump = Physics.CheckSphere(transform.position + Vector3.down, .5f, LayerMask.GetMask("Default"));
+        canJump = Physics.CheckSphere(transform.position + new Vector3(0,-0.6f,0), .5f, LayerMask.GetMask("Default"));
         if (canJump && Input.GetKeyDown(KeyCode.Space)) {
             PlayerBody.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
         }
@@ -51,6 +51,6 @@ public class PlayerMovementController : MonoBehaviour {
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position + Vector3.down, .5f);
+        Gizmos.DrawSphere(transform.position + new Vector3(0,-0.6f,0), .5f);
     }
 }
