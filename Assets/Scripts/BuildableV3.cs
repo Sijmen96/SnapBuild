@@ -39,5 +39,4 @@ public class BuildableV3 : MonoBehaviour {
             Gizmos.DrawSphere(transform.position + point, 0.1f);
         }
     }
-
 }

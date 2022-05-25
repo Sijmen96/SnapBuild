@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b039f94aa12c4544ad132825aa1c4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.6
 --- !u!108 &1288189361
 Light:
   m_ObjectHideFlags: 0
@@ -1459,7 +1459,7 @@ Light:
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 600
+  m_CookieSize: 250
   m_Shadows:
     m_Type: 0
     m_Resolution: -1
@@ -2443,7 +2443,7 @@ PrefabInstance:
     - target: {fileID: 2070492456209923034, guid: 7375876220e11104396860941b4f30ba, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: 826b5bd9bfe3d0a4499c1a3d3fd48b72, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2070492456209923035, guid: 7375876220e11104396860941b4f30ba, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2454,7 +2454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070492456209923038, guid: 7375876220e11104396860941b4f30ba, type: 3}
       propertyPath: speed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2070492456209923038, guid: 7375876220e11104396860941b4f30ba, type: 3}
       propertyPath: jumpforce

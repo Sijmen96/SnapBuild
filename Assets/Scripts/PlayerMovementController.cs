@@ -39,7 +39,7 @@ public class PlayerMovementController : MonoBehaviour {
         Vector3 velocitySmooth = Vector3.Lerp(PlayerBody.velocity, new Vector3(directionVector.x * speed, PlayerBody.velocity.y, directionVector.z * speed), Time.deltaTime * 7);
 
         if (!canJump) {
-            PlayerBody.velocity = velocitySmooth * 0.95f;
+            PlayerBody.velocity = velocitySmooth * 0.92f;
         } else {
             PlayerBody.velocity = velocitySmooth;
         }
