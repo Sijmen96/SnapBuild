@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
     public GameObject[] objects;
+    public GameObject BuildMenu;
     private GameObject selectedObject;
     private Vector3 selectedRotation;
 
@@ -17,6 +19,8 @@ public class BuildingManager : MonoBehaviour
 
     void Update()
     {
+        BuildingManagerMenu();
+
         if (selectedObject != null)
         {
             UpdateRotation();
@@ -169,6 +173,24 @@ public class BuildingManager : MonoBehaviour
             }
         }
     }
+
+
+
+    void BuildingManagerMenu()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            BuildMenu.SetActive(true);
+        }
+        else
+        {
+            BuildMenu.SetActive(false);
+        }
+
+    }
+
+
+
 
     void OnDrawGizmos()
     {

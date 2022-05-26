@@ -22,9 +22,9 @@ public class PlayerMovementController : MonoBehaviour
     private void Update()
     {
         //rayUp = Physics.Raycast(transform.position + new Vector3(0, 0.75f, 0), directionVector, 1.5f);
-        rayUp = Physics.Raycast(transform.position + new Vector3(0, -0.33f, 0), directionVector, .5f);
-        rayMid = Physics.Raycast(transform.position + new Vector3(0, -0.75f, 0), directionVector, .5f);
-        rayDown = Physics.Raycast(transform.position + new Vector3(0, -1f, 0), directionVector, .5f);
+        rayUp = Physics.Raycast(transform.position + new Vector3(0, -0.33f, 0), directionVector, .52f);
+        rayMid = Physics.Raycast(transform.position + new Vector3(0, -0.75f, 0), directionVector, .52f);
+        rayDown = Physics.Raycast(transform.position + new Vector3(0, -1f, 0), directionVector, .52f);
 
         canJump = Physics.CheckSphere(transform.position + new Vector3(0, -0.6f, 0), .5f, LayerMask.GetMask("Default"));
         if (canJump && Input.GetKeyDown(KeyCode.Space))
