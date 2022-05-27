@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4180117664345821400}
   - component: {fileID: 5389727188540896153}
   m_Layer: 0
-  m_Name: Planks
+  m_Name: F_planks
   m_TagString: Buildables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

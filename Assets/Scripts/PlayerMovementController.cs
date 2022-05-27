@@ -34,16 +34,16 @@ public class PlayerMovementController : MonoBehaviour
 
         if (PlayerBody.velocity.y < 0f && !canJump)
         {
-            PlayerBody.velocity += Vector3.up * Physics.gravity.y * 4f * Time.deltaTime;
+            PlayerBody.velocity += Vector3.up * Physics.gravity.y * 2f * Time.deltaTime;
         }
         else if (PlayerBody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
-            PlayerBody.velocity += Vector3.up * Physics.gravity.y * 1f * Time.deltaTime;
+            PlayerBody.velocity += Vector3.up * Physics.gravity.y * 2f * Time.deltaTime;
         }
 
         if (rayDown && rayMid && !rayUp)
         {
-            PlayerBody.velocity = new Vector3(0, 3, 0) + directionVector;
+            PlayerBody.velocity = new Vector3(0, 5, 0) + directionVector;
         }
     }
 
@@ -56,11 +56,11 @@ public class PlayerMovementController : MonoBehaviour
         directionVector = CameraPivot.rotation * playerInput;
         directionVector.Normalize();
 
-        Vector3 velocitySmooth = Vector3.Lerp(PlayerBody.velocity, new Vector3(directionVector.x * speed, PlayerBody.velocity.y, directionVector.z * speed), Time.deltaTime * 7);
+        Vector3 velocitySmooth = Vector3.Lerp(PlayerBody.velocity, new Vector3(directionVector.x * speed, PlayerBody.velocity.y, directionVector.z * speed), Time.deltaTime * 5);
 
         if (!canJump)
         {
-            PlayerBody.velocity = velocitySmooth * 0.92f;
+            PlayerBody.velocity = velocitySmooth * 0.96f;
         }
         else
         {

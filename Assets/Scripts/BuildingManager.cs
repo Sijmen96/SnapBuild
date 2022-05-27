@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BuildingManager : MonoBehaviour
 {
-    public GameObject[] objects;
+    public BuildableDatabase BuildableDatabase;
     public GameObject BuildMenu;
     public GameObject mainMenu;
     private GameObject selectedObject;
@@ -48,8 +48,9 @@ public class BuildingManager : MonoBehaviour
             }
             else
             {
-                selectedObject.transform.position = GetMouseWorldPosistion() + selectedObject.GetComponent<BuildableV3>().snapPoints[0]; //snap point?
-                selectedObject.transform.RotateAround(selectedSnap, Vector3.up, selectedRotation.y);
+                Debug.Log("Im here");
+                selectedObject.transform.position = GetMouseWorldPosistion();// + selectedObject.GetComponent<BuildableV3>().snapPoints[0]; //snap point?
+                selectedObject.transform.RotateAround(selectedSnap + selectedObject.transform.position, Vector3.up, selectedRotation.y);
             }
 
             //Rotate snapPoints
@@ -76,7 +77,7 @@ public class BuildingManager : MonoBehaviour
 
     public void selectObject(int index)
     {
-        selectedObject = Instantiate(objects[index], GetMouseWorldPosistion(), objects[index].transform.rotation);
+        selectedObject = Instantiate(BuildableDatabase.Buildables[index].Prefab, GetMouseWorldPosistion(), BuildableDatabase.Buildables[index].Prefab.transform.rotation);
         selectedObject.GetComponent<BuildableV3>().isSelectedObject = true;
         selectedObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }

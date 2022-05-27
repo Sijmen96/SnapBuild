@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0708b94155c83141b2f443e88fcfbe4, type: 3}
-  m_Name: floor
+  m_Name: F_beam_V
   m_EditorClassIdentifier: 
-  Name: Floor
-  Sprite: {fileID: 21300000, guid: 4c89c830a2886234a90a5f9f69fe3625, type: 3}
-  Prefab: {fileID: 3023028109437224664, guid: 997f74d7c00e3774c9c8787aa6e170de, type: 3}
+  Name: Full Beam
+  Sprite: {fileID: 21300000, guid: 0a6dffcd79fd87f43945f123723400ca, type: 3}
+  Prefab: {fileID: 5478667004982008590, guid: b9b6b2a23bbc9c642b8a14719e0c1cca, type: 3}
