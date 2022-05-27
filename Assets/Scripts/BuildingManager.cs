@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BuildingManager : MonoBehaviour
 {
     public GameObject[] objects;
     public GameObject BuildMenu;
+    public GameObject mainMenu;
     private GameObject selectedObject;
     private Vector3 selectedRotation;
 
@@ -17,9 +19,15 @@ public class BuildingManager : MonoBehaviour
 
     private bool snapActive = false;
 
+    private void Start()
+    {
+        mainMenu.transform.GetComponentInChildren<Button>().onClick.AddListener(onMainMenuClick);
+    }
+
     void Update()
     {
         BuildingManagerMenu();
+        MainMenu();
 
         if (selectedObject != null)
         {
@@ -187,6 +195,20 @@ public class BuildingManager : MonoBehaviour
             BuildMenu.SetActive(false);
         }
 
+    }
+
+    void MainMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mainMenu.SetActive(!mainMenu.activeSelf);
+        }
+
+    }
+
+    private void onMainMenuClick()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
 
