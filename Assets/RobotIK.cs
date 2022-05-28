@@ -13,7 +13,6 @@ public class RobotIK : MonoBehaviour
     public float stepSpeed = 15f;
     public float stepDistance = 2f;
 
-    private Vector3 directionVector;
     private bool walkState = false;
 
     Vector3 leftPoint, rightPoint;
