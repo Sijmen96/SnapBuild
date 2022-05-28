@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Authentication;
@@ -26,9 +27,11 @@ public class MainMenuManager : MonoBehaviour
     public GameObject joinPanel;
     public GameObject hostCodeInput;
     public GameObject joinServer;
+    public GameObject joinError;
 
     private Allocation allocation;
     private JoinAllocation joinAllocation;
+
     void Start()
     {
         UnityServices.InitializeAsync();
@@ -61,7 +64,7 @@ public class MainMenuManager : MonoBehaviour
         joinButton.onClick.AddListener(onJoinButtonClick);
         hostButton.onClick.AddListener(onHostButtonClick);
         startServerButton.onClick.AddListener(onStartServerButtonClick);
-        startServerButton.enabled = false;
+        startServerButton.interactable = false;
         joinServerButton.onClick.AddListener(onJoinServerButtonClick);
 
     }
@@ -84,7 +87,7 @@ public class MainMenuManager : MonoBehaviour
 
         //set code and activate button
         this.hostVariable.GetComponent<TextMeshProUGUI>().text = joinCode;
-        startServer.GetComponent<Button>().enabled = true;
+        startServer.GetComponent<Button>().interactable = true;
     }
 
     private void onMultiplayerButtonClick()
@@ -97,19 +100,25 @@ public class MainMenuManager : MonoBehaviour
     {
         this.multiplayerPanel.SetActive(false);
         this.hostPanel.SetActive(true);
+        startServer.GetComponent<Button>().interactable = false;
         getHostAllocation();
     }
 
     private void onJoinButtonClick()
     {
-        this.joinServer.GetComponent<Button>().enabled = false;
+        this.joinServer.GetComponent<Button>().interactable = false;
         this.multiplayerPanel.SetActive(false);
         this.joinPanel.SetActive(true);
         this.hostCodeInput.GetComponent<TMP_InputField>().onValueChanged.AddListener((textbox) =>
         {
-            if (textbox.Length > 0)
+            this.joinError.GetComponent<TextMeshProUGUI>().text = "";
+            if (textbox.Length == 6)
             {
-                this.joinServer.GetComponent<Button>().enabled = true;
+                this.joinServer.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                this.joinServer.GetComponent<Button>().interactable = false;
             }
         });
     }
@@ -122,7 +131,16 @@ public class MainMenuManager : MonoBehaviour
     private async void onJoinServerButtonClick()
     {
         string joinCode = this.hostCodeInput.GetComponent<TMP_InputField>().text;
-        joinAllocation = await Unity.Services.Relay.RelayService.Instance.JoinAllocationAsync(joinCode);
+        try
+        {
+            joinAllocation = await Unity.Services.Relay.RelayService.Instance.JoinAllocationAsync(joinCode);
+        }
+        catch(Exception e)
+        {
+            Debug.Log("error fetching code: " + e.Message);
+            this.joinError.GetComponent<TextMeshProUGUI>().text = "Invalid code used";
+            return;
+        }
 
         //set relay data in static class
         RelayData.isHost = false;
@@ -134,11 +152,10 @@ public class MainMenuManager : MonoBehaviour
         RelayData.ConnectionData = this.joinAllocation.ConnectionData;
         RelayData.HostConnectionData = this.joinAllocation.HostConnectionData;
         RelayData.Key = this.joinAllocation.Key;
-
+        
 
         //set code and activate button
         this.hostVariable.GetComponent<TextMeshProUGUI>().text = joinCode;
-        startServer.GetComponent<Button>().enabled = true;
         SceneManager.LoadScene("Multiplayer");
     }
 
