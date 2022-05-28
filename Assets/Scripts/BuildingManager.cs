@@ -48,7 +48,6 @@ public class BuildingManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Im here");
                 selectedObject.transform.position = GetMouseWorldPosistion();// + selectedObject.GetComponent<BuildableV3>().snapPoints[0]; //snap point?
                 selectedObject.transform.RotateAround(selectedSnap + selectedObject.transform.position, Vector3.up, selectedRotation.y);
             }

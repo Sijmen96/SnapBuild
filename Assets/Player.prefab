@@ -226,4 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5156bf3a929a54e80056b3307cd19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  CameraPivot: {fileID: 0}
+  PlayerBody: {fileID: 0}
+  speed: 0
+  jumpforce: 0
