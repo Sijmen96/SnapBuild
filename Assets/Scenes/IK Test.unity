@@ -138,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54735375}
   - component: {fileID: 54735376}
+  - component: {fileID: 54735377}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -153,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54735374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.59, y: 3.37, z: 0.5933807}
+  m_LocalPosition: {x: -15.16, y: 2.95, z: 0.5933807}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -175,6 +176,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLeft: {fileID: 635261644}
   targetRight: {fileID: 1476672271}
+  rigidBody: {fileID: 54735377}
+  stepHeight: 0.5
+  stepSpeed: 5
+  stepDistance: 2
+--- !u!54 &54735377
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54735374}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
 --- !u!1 &88000903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eba5ddf7775e4824a865be671b12e269, type: 3}
@@ -514,14 +535,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782048804}
-  m_LocalRotation: {x: 0.3658671, y: -0.19022548, z: 0.0766669, w: 0.9077873}
-  m_LocalPosition: {x: 11, y: 29.9, z: -19}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 9.6, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 43.902, y: -23.67, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &787755170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9044806412961212599, guid: eba5ddf7775e4824a865be671b12e269, type: 3}
