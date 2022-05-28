@@ -13,6 +13,7 @@ public class RobotIK : MonoBehaviour
     public float stepSpeed = 15f;
     public float stepDistance = 2f;
 
+    private Vector3 directionVector;
     private bool walkState = false;
 
     Vector3 leftPoint, rightPoint;
@@ -25,17 +26,11 @@ public class RobotIK : MonoBehaviour
         rightFootPosition = new Vector3(-.5f, -1, .6f) + transform.position;
     }
 
-    private void Update()
-    {
-        rigidBody.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * 5, 0, 0);
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
         Ray leftRay;
         Ray rightRay;
-       
 
         if (rigidBody.velocity.x > .1f || rigidBody.velocity.z > .1f)
         {

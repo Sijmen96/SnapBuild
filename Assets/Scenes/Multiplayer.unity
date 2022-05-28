@@ -303,10 +303,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 356018872}
-    PlayerPrefab: {fileID: 5871883000813216085, guid: fd4378b0e9caed340b9ebf736417ce29, type: 3}
+    PlayerPrefab: {fileID: 8407194890874531379, guid: ad34152fbd6491b4995a4737f55223d7, type: 3}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 5871883000813216085, guid: fd4378b0e9caed340b9ebf736417ce29, type: 3}
+      Prefab: {fileID: 8407194890874531379, guid: ad34152fbd6491b4995a4737f55223d7, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
@@ -1703,13 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2102b3fc03c15434287afce2ecf92be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 3023028109437224664, guid: 77333774975afb44d89f43e46b233572, type: 3}
-  - {fileID: 5478667004982008590, guid: b9b6b2a23bbc9c642b8a14719e0c1cca, type: 3}
-  - {fileID: 3023028109437224664, guid: 46aa99acbc001a9429ee9dbda43ae315, type: 3}
-  - {fileID: 3023028109437224664, guid: 70581ec8693e4b84689a06380954a9ea, type: 3}
-  - {fileID: 3023028109437224664, guid: 997f74d7c00e3774c9c8787aa6e170de, type: 3}
-  - {fileID: 3023028109437224664, guid: fdea085d77475f34ba1f1d68725752a1, type: 3}
+  BuildableDatabase: {fileID: 0}
   BuildMenu: {fileID: 914289545}
   mainMenu: {fileID: 634279390}
 --- !u!4 &1317023587
