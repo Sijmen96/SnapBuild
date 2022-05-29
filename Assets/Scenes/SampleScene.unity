@@ -712,13 +712,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e91acdbde74424fbe4fb195f3e8cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items:
-  - Name: 
-    Sprite: {fileID: 0}
-    Prefab: {fileID: 0}
-  - Name: 
-    Sprite: {fileID: 0}
-    Prefab: {fileID: 0}
 --- !u!4 &463451670
 Transform:
   m_ObjectHideFlags: 0
@@ -1825,9 +1818,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3389251660176492334, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8314539932586914146, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8314539932586914146, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: runningSpeed
@@ -1847,11 +1844,11 @@ PrefabInstance:
       objectReference: {fileID: 6444432332322347308, guid: e8f1462c8c907cd4e8e68ff46ed5b1c2, type: 3}
     - target: {fileID: 8314539932586914146, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: jumpFallMultiplier
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8314539932586914146, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: jumpForceMultiplier
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8642922911141615556, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: m_RootOrder
