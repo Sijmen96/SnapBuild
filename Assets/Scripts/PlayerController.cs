@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
     void checkJumpState()
     {
         //Determine jumpstate
-        if (Physics.CheckSphere(transform.position + new Vector3(0, -.6f, 0), .5f, LayerMask.GetMask("Default")))
+        if (Physics.CheckSphere(transform.position + new Vector3(0, -.7f, 0), .5f, LayerMask.GetMask("Default")))
         {
             this.jumpState = PlayerJumpState.grounded;
             playerRigidbody.useGravity = false;

@@ -33,11 +33,18 @@ public class PlayerInverseKinamatics : MonoBehaviour
         {
             leftRayOrigin = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * new Vector3(-.3f, 0, .5f) + transform.position;
             rightRayOrigin = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * new Vector3(.3f, 0, .5f) + transform.position;
-            Debug.Log(transform.rotation.y);
+
 
             leftRay = new Ray(leftRayOrigin, Vector3.down);
             rightRay = new Ray(rightRayOrigin, Vector3.down);
         }
+        else
+        {
+            leftFootPosition = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * new Vector3(-.3f, -.5f, 0) + transform.position;
+            rightFootPosition = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * new Vector3(.3f, -.5f, 0) + transform.position;
+        }
+
+        Debug.Log(playerController.jumpState);
 
 
         if (Physics.Raycast(leftRay, out leftHit))
