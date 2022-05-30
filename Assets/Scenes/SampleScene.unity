@@ -1270,15 +1270,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: stepSpeed
-      value: 10
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: stepHeight
-      value: 2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: stepDistance
-      value: 1
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: rayVelocityMultiplier
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 943693884484738634, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: m_Name

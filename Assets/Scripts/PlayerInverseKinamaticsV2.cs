@@ -10,6 +10,7 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
     [SerializeField] float stepDistance;
     [SerializeField] float stepHeight;
     [SerializeField] float stepSpeed;
+    [SerializeField] float rayVelocityMultiplier;
     [Space]
     [SerializeField] GameObject targetLeft;
     [SerializeField] GameObject targetRight;
@@ -18,9 +19,14 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
     private Vector3 leftFootTarget, rightFootTarget;
     private Vector3 leftFootPosition, rightFootPosition;
     private float leftLerp, rightLerp;
+    private float stepFloat, speedFloat;
 
     void Update()
     {
+        stepFloat = stepDistance * playerRigidbody.velocity.magnitude * 0.3f;
+        speedFloat = stepSpeed + (playerRigidbody.velocity.magnitude * .05f);
+        //Debug.Log(speedFloat);
+
         if (playerController.jumpState == PlayerJumpState.grounded)
         {
             CalculateRayOrigins();
@@ -28,21 +34,20 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
             leftFootTarget = getRay(new Ray(leftRayOrigin, Vector3.down));
             rightFootTarget = getRay(new Ray(rightRayOrigin, Vector3.down));
 
-            if (Vector3.Distance(leftFootTarget, leftFootPosition) > stepDistance && Vector3.Distance(leftFootTarget, rightFootPosition) > (stepDistance * 0.8))
+            if (Vector3.Distance(leftFootTarget, leftFootPosition) > stepFloat && Vector3.Distance(leftFootTarget, rightFootPosition) > (stepFloat * 0.8))
             {
-                Debug.Log("set step");
                 leftLerp = 0;
                 leftFootPosition = leftFootTarget;
             }
 
-            if (Vector3.Distance(rightFootTarget, rightFootPosition) > stepDistance && Vector3.Distance(rightFootTarget, leftFootPosition) > (stepDistance * 0.8))
+            if (Vector3.Distance(rightFootTarget, rightFootPosition) > stepFloat && Vector3.Distance(rightFootTarget, leftFootPosition) > (stepFloat * 0.8))
             {
                 rightLerp = 0;
                 rightFootPosition = rightFootTarget;
             }
 
-            AnimateLeg(leftFootPosition, targetLeft, leftLerp);
-            AnimateLeg(rightFootPosition, targetRight, rightLerp);
+            AnimateLeg(leftFootPosition, ref targetLeft, ref leftLerp);
+            AnimateLeg(rightFootPosition, ref targetRight, ref rightLerp);
 
 
         }
@@ -59,16 +64,16 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
 
     }
 
-    void AnimateLeg(Vector3 targetPosition, GameObject targetLeg, float lerp)
+    void AnimateLeg(Vector3 targetPosition, ref GameObject targetLeg, ref float lerp)
     {
         if (lerp < 1)
         {
-            Vector3 left = Vector3.Lerp(targetLeg.transform.position, targetPosition, lerp);
-            left.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
+            Vector3 target = Vector3.Lerp(targetLeg.transform.position, targetPosition, lerp);
+            target.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
 
-            targetLeg.transform.position = left;
-            lerp += Time.deltaTime * stepSpeed;
-            //Debug.Log(lerp);
+            targetLeg.transform.position = target;
+            lerp += Time.deltaTime * speedFloat;
+            Debug.Log(lerp);
         }
         else
         {
@@ -78,10 +83,10 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
 
     void CalculateRayOrigins()
     {
-        float speedStepDistance = playerRigidbody.velocity.magnitude * (stepDistance / 5);
+        float speedStepDistance = playerRigidbody.velocity.magnitude * rayVelocityMultiplier;
 
-        leftRayOrigin = RotateVector(new Vector3(-.3f, 0, speedStepDistance));
-        rightRayOrigin = RotateVector(new Vector3(.3f, 0, speedStepDistance));
+        leftRayOrigin = RotateVector(new Vector3(-.3f, 0, speedStepDistance + 0.3f));
+        rightRayOrigin = RotateVector(new Vector3(.3f, 0, speedStepDistance + 0.3f));
     }
 
     private Vector3 RotateVector(Vector3 vector)
