@@ -585,29 +585,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361461012}
   m_CullTransparentMesh: 1
---- !u!1 &388200320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 943693884484738634, guid: d0e020d91d6937846b2318899861a88d, type: 3}
-  m_PrefabInstance: {fileID: 1368966113}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &388200328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388200320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61986fc40a401d246b8eecc4b8496afe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  targetLeft: {fileID: 0}
-  targetRight: {fileID: 0}
-  stepHeight: 0.25
-  stepSpeed: 15
-  stepDistance: 0.5
 --- !u!1 &458723852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1268,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: stepSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: stepHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: stepDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 943693884484738634, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: m_Name
       value: MainPlayer
