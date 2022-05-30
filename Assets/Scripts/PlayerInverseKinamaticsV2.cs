@@ -23,8 +23,8 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
 
     void Update()
     {
-        stepFloat = stepDistance * playerRigidbody.velocity.magnitude * 0.3f;
-        speedFloat = stepSpeed + (playerRigidbody.velocity.magnitude * .05f);
+        stepFloat = stepDistance + (playerRigidbody.velocity.magnitude * 0.3f);
+        speedFloat = stepSpeed + (playerRigidbody.velocity.magnitude * .1f);
         //Debug.Log(speedFloat);
 
         if (playerController.jumpState == PlayerJumpState.grounded)
@@ -46,10 +46,6 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
                 rightFootPosition = rightFootTarget;
             }
 
-            AnimateLeg(leftFootPosition, ref targetLeft, ref leftLerp);
-            AnimateLeg(rightFootPosition, ref targetRight, ref rightLerp);
-
-
         }
         else if (playerController.jumpState == PlayerJumpState.rising)
         {
@@ -64,6 +60,12 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        AnimateLeg(leftFootPosition, ref targetLeft, ref leftLerp);
+        AnimateLeg(rightFootPosition, ref targetRight, ref rightLerp);
+    }
+
     void AnimateLeg(Vector3 targetPosition, ref GameObject targetLeg, ref float lerp)
     {
         if (lerp < 1)
@@ -72,8 +74,7 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
             target.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
 
             targetLeg.transform.position = target;
-            lerp += Time.deltaTime * speedFloat;
-            Debug.Log(lerp);
+            lerp += Time.fixedDeltaTime * speedFloat;
         }
         else
         {
@@ -84,9 +85,12 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
     void CalculateRayOrigins()
     {
         float speedStepDistance = playerRigidbody.velocity.magnitude * rayVelocityMultiplier;
-
-        leftRayOrigin = RotateVector(new Vector3(-.3f, 0, speedStepDistance + 0.3f));
-        rightRayOrigin = RotateVector(new Vector3(.3f, 0, speedStepDistance + 0.3f));
+        if(playerRigidbody.velocity.magnitude > 0.3)
+        {
+            speedStepDistance += 0.3f;
+        }
+        leftRayOrigin = RotateVector(new Vector3(-.3f, 0, speedStepDistance));
+        rightRayOrigin = RotateVector(new Vector3(.3f, 0, speedStepDistance));
     }
 
     private Vector3 RotateVector(Vector3 vector)
