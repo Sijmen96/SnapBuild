@@ -1269,6 +1269,54 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Idle
+      value: 
+      objectReference: {fileID: 11400000, guid: 91d3ea216cc05f24a96710e8adc33f40, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: idle
+      value: 
+      objectReference: {fileID: 11400000, guid: 91d3ea216cc05f24a96710e8adc33f40, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Rising
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ba33f44d36239b439950e01b7fe375a, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: rising
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ba33f44d36239b439950e01b7fe375a, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Falling
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b369c813dfbc34fb48f0cacf93c460, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Running
+      value: 
+      objectReference: {fileID: 11400000, guid: 6797ad740186c684aa0f54285f524034, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Walking
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ea006117ef11764a9f1738af56575e6, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: falling
+      value: 
+      objectReference: {fileID: 11400000, guid: 96b369c813dfbc34fb48f0cacf93c460, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: running
+      value: 
+      objectReference: {fileID: 11400000, guid: 6797ad740186c684aa0f54285f524034, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: walking
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ea006117ef11764a9f1738af56575e6, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: Crouching
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b90cf4a66b7a574d9f017e134329036, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: crouching
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b90cf4a66b7a574d9f017e134329036, type: 2}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: stepSpeed
       value: 2.5
       objectReference: {fileID: 0}
@@ -1281,9 +1329,17 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: IKStates.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: rayVelocityMultiplier
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 307742166179674839, guid: d0e020d91d6937846b2318899861a88d, type: 3}
+      propertyPath: IKStates.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 91d3ea216cc05f24a96710e8adc33f40, type: 2}
     - target: {fileID: 943693884484738634, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: m_Name
       value: MainPlayer
@@ -1294,15 +1350,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3168076368708488654, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: runningSpeed
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3168076368708488654, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: walkingSpeed
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3168076368708488654, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: chrouchingSpeed
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3168076368708488654, guid: d0e020d91d6937846b2318899861a88d, type: 3}
       propertyPath: springCurve.m_Curve.Array.size
