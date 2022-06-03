@@ -27,6 +27,7 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
     private Vector3 leftRayOrigin, rightRayOrigin;
     private Vector3 leftFootTarget, rightFootTarget;
     private Vector3 leftFootPosition, rightFootPosition;
+    private Vector3 leftLerpPosition, rightLerpPosition;
 
     private float leftLerp, rightLerp;
 
@@ -53,12 +54,14 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
             if (Vector3.Distance(leftFootTarget, leftFootPosition) > currentIKState.stepDistance && Vector3.Distance(leftFootTarget, rightFootPosition) > (currentIKState.stepDistance * .95))
             {
                 leftLerp = 0;
+                leftLerpPosition = targetLeft.transform.position;
                 leftFootPosition = leftFootTarget;
             }
 
             if (Vector3.Distance(rightFootTarget, rightFootPosition) > currentIKState.stepDistance && Vector3.Distance(rightFootTarget, leftFootPosition) > (currentIKState.stepDistance * .95))
             {
                 rightLerp = 0;
+                rightLerpPosition = targetRight.transform.position;
                 rightFootPosition = rightFootTarget;
             }
             if (!lockGrounded)
@@ -122,16 +125,17 @@ public class PlayerInverseKinamaticsV2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        AnimateLeg(leftFootPosition, ref targetLeft, ref leftLerp);
-        AnimateLeg(rightFootPosition, ref targetRight, ref rightLerp);
+        AnimateLeg(leftFootPosition, leftLerpPosition, ref targetLeft, ref leftLerp);
+        AnimateLeg(rightFootPosition, rightLerpPosition, ref targetRight, ref rightLerp);
     }
 
-    void AnimateLeg(Vector3 targetPosition, ref GameObject targetLeg, ref float lerp)
+    void AnimateLeg(Vector3 targetPosition, Vector3 originPosition, ref GameObject targetLeg, ref float lerp)
     {
         if (lerp < 1)
         {
             Debug.Log(lerp);
-            Vector3 target = Vector3.Lerp(targetLeg.transform.position, targetPosition, lerp);
+            // add Linear lerp with start position
+            Vector3 target = Vector3.Lerp(originPosition, targetPosition, lerp);
             target.y += Mathf.Sin(lerp * Mathf.PI) * currentIKState.stepHeight;
 
             targetLeg.transform.position = target;

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Walking
   m_EditorClassIdentifier: 
   Name: 
-  stepDistance: 0.9
-  stepSpeed: 8
+  stepDistance: 1.1
+  stepSpeed: 10
   stepHeight: 0.15
-  stepOffset: 0.4
+  stepOffset: 0.9
   leftLegPosition: {x: 0, y: 0, z: 0}
   rightLegPosition: {x: 0, y: 0, z: 0}
